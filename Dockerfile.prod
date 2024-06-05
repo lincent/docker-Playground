@@ -1,0 +1,7 @@
+FROM python
+
+WORKDIR /src/play
+
+COPY ./ ./
+
+ENTRYPOINT [ "python", "main.py" ]
