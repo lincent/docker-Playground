@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v3
       - name: login
         run: |
-          docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN}}
+          docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN}} ghcr.io
       - name: build
         run: |
           docker build . -t ghcr.io/${{ github.repository }}/test:latest -f Dockerfile.prod
