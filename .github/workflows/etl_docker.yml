@@ -16,4 +16,4 @@ jobs:
           docker build . -t ghcr.io/${{ github.repository }}/test:latest -f Dockerfile.prod
       - name: publish
         run: |
-          docker push ${{ github.repository }}/test:latest
+          docker push ghcr.io/${{ github.repository }}/test:latest
