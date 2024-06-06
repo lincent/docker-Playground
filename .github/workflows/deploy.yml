@@ -16,10 +16,7 @@ jobs:
           ssh-keyscan -H ${{ vars.SSH_HOST }} > ~/.ssh/known_hosts
       - name: connect
         run: |
-          ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} / 
-          "cd ${{ vars.WORK_DIR }} /
-          && docker run -t ghcr.io/${{ github.repository }}/test:latest /
-          && exit"
+          ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd ${{ vars.WORK_DIR }} && docker run -t ghcr.io/${{ github.repository }}/test:latest && exit"
       - name: clean up
         run: |
           rm -rf ~/.ssh
