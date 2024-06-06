@@ -19,12 +19,12 @@ jobs:
           ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd /usr/test && \\
             rm -f .env && \\
             sudo touch .env && \\
-            echo MONGO_DB_URI=${{ secrets.MONGO_URI }} > .env && \\
-            echo MONGO_DB_NAME=${{ secrets.MONGO_DB_NAME }} > .env && \\
-            echo OPEN_AQ_API_KEY=${{ secrets.OPENAQ_KEY }} > .env && \\
-            echo CDSAPI_URL=${{ secrets.CDSAPI_URL }} > .env && \\
-            echo CDSAPI_KEY=${{ secrets.CDSAPI_KEY }} > .env && \\
-            cat .env" && \\
+            sudo echo MONGO_DB_URI=${{ secrets.MONGO_URI }} > .env && \\
+            sudo echo MONGO_DB_NAME=${{ secrets.MONGO_DB_NAME }} > .env && \\
+            sudo echo OPEN_AQ_API_KEY=${{ secrets.OPENAQ_KEY }} > .env && \\
+            sudo echo CDSAPI_URL=${{ secrets.CDSAPI_URL }} > .env && \\
+            sudo echo CDSAPI_KEY=${{ secrets.CDSAPI_KEY }} > .env && \\
+            sudo cat .env" && \\
             exit"
       - name: activate docker
         run: |  
