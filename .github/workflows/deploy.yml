@@ -1,0 +1,26 @@
+name: Deploy docker
+on:
+  [workflow_dispatch]
+
+jobs:
+  deploy:
+    name: deploy image
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - name: install ssh keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+      - name: connect
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} / 
+          "cd ${{ vars.WORK_DIR }} /
+          && docker run -t ghcr.io/${{ github.repository }}/test:latest /
+          && exit"
+      - name: clean up
+        run: |
+          rm -rf ~/.ssh
+
