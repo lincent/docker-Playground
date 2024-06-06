@@ -17,14 +17,11 @@ jobs:
       - name: create .env
         run: |
           ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd /usr/test && \\
-            sudo rm -f .env && \\
-            sudo touch .env && \\
-            sudo echo MONGO_DB_URI=${{ secrets.MONGO_URI }} > .env && \\
-            sudo echo MONGO_DB_NAME=${{ secrets.MONGO_DB_NAME }} > .env && \\
-            sudo echo OPEN_AQ_API_KEY=${{ secrets.OPENAQ_KEY }} > .env && \\
-            sudo echo CDSAPI_URL=${{ secrets.CDSAPI_URL }} > .env && \\
-            sudo echo CDSAPI_KEY=${{ secrets.CDSAPI_KEY }} > .env && \\
-            sudo cat .env" && \\
+            sudo echo MONGO_DB_URI=${{ secrets.MONGO_URI }} | sudo tee .env && \\
+            sudo echo MONGO_DB_NAME=${{ secrets.MONGO_DB_NAME }} | sudo tee -a .env && \\
+            sudo echo OPEN_AQ_API_KEY=${{ secrets.OPENAQ_KEY }} > sudo tee -a .env && \\
+            sudo echo CDSAPI_URL=${{ secrets.CDSAPI_URL }} > sudo tee -a .env && \\
+            sudo echo CDSAPI_KEY=${{ secrets.CDSAPI_KEY }} > sudo tee -a .env && \\
             exit"
       - name: activate docker
         run: |  
