@@ -25,9 +25,10 @@ jobs:
             exit"
       - name: activate docker
         run: |  
-          ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "sudo docker run -d -t ghcr.io/${{ github.repository }}/test:latest && exit"
+          ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd /usr/test && \\
+            sudo docker run --env-file .env ghcr.io/${{ github.repository }}/test:latest && \\
+            exit"
       - name: clean up
         run: |
-          exit
           rm -rf ~/.ssh
 

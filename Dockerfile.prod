@@ -3,5 +3,6 @@ FROM python
 WORKDIR /src/play
 
 COPY ./ ./
+RUN pip install python-dotenv
 
 ENTRYPOINT [ "python", "main.py" ]
