@@ -18,7 +18,7 @@ jobs:
         run: |
           ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd /usr/test && \\
             rm -f .env && \\
-            touch .env && \\
+            sudo touch .env && \\
             echo MONGO_DB_URI=${{ secrets.MONGO_URI }} > .env && \\
             echo MONGO_DB_NAME=${{ secrets.MONGO_DB_NAME }} > .env && \\
             echo OPEN_AQ_API_KEY=${{ secrets.OPENAQ_KEY }} > .env && \\
