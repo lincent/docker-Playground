@@ -17,6 +17,7 @@ def main():
     print(f"openaq = {openaq}")
     print(f"cds_uri = {cds_uri}")
     print(f"cds_key = {cds_key}")
+    print("and those were the environment variables")
 
 
 if __name__ == "__main__":
