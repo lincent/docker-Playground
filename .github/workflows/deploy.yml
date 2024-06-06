@@ -17,7 +17,7 @@ jobs:
       - name: create .env
         run: |
           ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd /usr/test && \\
-            rm -f .env && \\
+            sudo rm -f .env && \\
             sudo touch .env && \\
             sudo echo MONGO_DB_URI=${{ secrets.MONGO_URI }} > .env && \\
             sudo echo MONGO_DB_NAME=${{ secrets.MONGO_DB_NAME }} > .env && \\
