@@ -16,8 +16,23 @@ jobs:
           ssh-keyscan -H ${{ vars.SSH_HOST }} > ~/.ssh/known_hosts
       - name: connect
         run: |
-          ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} "cd ${{ vars.WORK_DIR }} && sudo docker run -t ghcr.io/${{ github.repository }}/test:latest && exit"
+          ssh ${{ vars.SSH_USER }}@${{ vars.SSH_HOST }} 
+      - name: create .env
+        run: |
+          cd /usr/test
+          rm .env
+          touch .env
+          echo MONGO_DB_URI=${{ secrets.MONGO_URI }} > .env
+          echo MONGO_DB_NAME=${{ secrets.MONGO_DB_NAME }} > .env
+          echo OPEN_AQ_API_KEY=${{ secrets.OPENAQ_KEY }} > .env
+          echo CDSAPI_URL=${{ secrets.CDSAPI_URL }} > .env
+          echo CDSAPI_KEY=${{ secrets.CDSAPI_KEY }} > .env
+          cat .env
+      - name: activate docker
+        run: |  
+          sudo docker run -d -t ghcr.io/${{ github.repository }}/test:latest
       - name: clean up
         run: |
+          exit
           rm -rf ~/.ssh
 
