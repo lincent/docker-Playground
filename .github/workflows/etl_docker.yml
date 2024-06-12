@@ -19,7 +19,7 @@ jobs:
           echo "The value of REPO is ${REPO}"
       - name: login
         run: |
-          docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN}} ghcr.io
+          echo ${{ secrets.GITHUB_TOKEN}} | docker login --username ${{ github.actor }} --password-stdin ghcr.io
       - name: build
         run: |
           docker build . -t ghcr.io/${REPO}/folder/test2:latest -f Dockerfile.prod
