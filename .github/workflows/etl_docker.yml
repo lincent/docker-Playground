@@ -11,12 +11,16 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+      - name: lowercase
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY@L}" >> "GITHUB_ENV"
+          echo "The value of REPO is ${REPO}
       - name: login
         run: |
           docker login --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN}} ghcr.io
       - name: build
         run: |
-          docker build . -t ghcr.io/${GITHUB_REPOSITORY@L}/folder/test2:latest -f Dockerfile.prod
+          docker build . -t ghcr.io/${REPO}/folder/test2:latest -f Dockerfile.prod
       - name: publish
         run: |
-          docker push ghcr.io/${GITHUB_REPOSITORY@L}/folder/test2:latest
+          docker push ghcr.io/${REPO}/folder/test2:latest
